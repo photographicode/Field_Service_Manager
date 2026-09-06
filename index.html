@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Reports Manager - Deployment Request</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        .toast-enter { animation: slideIn 0.3s ease-out forwards; }
+        @keyframes slideIn {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased py-12 px-4 sm:px-6 lg:px-8">
+
+    <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
+        
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-teal-700 to-cyan-800 px-8 py-10 text-white text-center">
+            <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4 backdrop-blur-sm border border-white/20 text-2xl font-bold shadow-inner">SP</div>
+            <h1 class="text-3xl font-bold tracking-tight mb-2">Deployment Request</h1>
+            <p class="text-teal-100 max-w-xl mx-auto text-sm leading-relaxed">Please fill out the details below to initiate the setup of a private Service Reports Manager instance for your congregation. This tool is provided "as-is" and relies on voluntary donations.</p>
+            
+            <div class="mt-6">
+                <a href="presentation.html" target="_blank" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white px-5 py-2.5 rounded-lg font-semibold shadow-sm transition-all text-sm">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    Review Presentation Deck
+                </a>
+            </div>
+        </div>
+
+        <!-- Form Content using FormSubmit.co -->
+        <form id="deploymentForm" action="https://formsubmit.co/photographicode@gmail.com" method="POST" class="px-8 py-10 space-y-8" onsubmit="return handleValidation(event)">
+            
+            <!-- FormSubmit Configuration Fields -->
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_subject" value="New SRM Deployment Request!">
+            <input type="hidden" name="_template" value="table">
+            
+            <!-- Section 1: Congregation Details -->
+            <div>
+                <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">1. Congregation Details</h3>
+                <div class="grid grid-cols-1 gap-5">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">Congregation Name</label>
+                        <input type="text" name="Congregation_Name" required placeholder="e.g., Central, New York" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none transition-all">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-1">Approximate Number of Publishers</label>
+                            <select name="Number_Of_Publishers" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none transition-all">
+                                <option value="">Select an option</option>
+                                <option value="Under 50">Under 50</option>
+                                <option value="50 - 100">50 - 100</option>
+                                <option value="101 - 150">101 - 150</option>
+                                <option value="150+">150+</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-1">Current Collection Method</label>
+                            <select name="Current_Collection_Method" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none transition-all">
+                                <option value="">Select an option</option>
+                                <option value="Paper Slips Only">Paper Slips Only</option>
+                                <option value="WhatsApp / Text Messages">WhatsApp / Text Messages</option>
+                                <option value="Another Digital App">Another Digital App</option>
+                                <option value="Mixed (Paper & Digital)">Mixed (Paper & Digital)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Contact Person -->
+            <div>
+                <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">2. Administrative Contact</h3>
+                <p class="text-sm text-slate-500 mb-4">This should be the Secretary or the brother handling the technical deployment.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">Full Name</label>
+                        <input type="text" name="Admin_Name" required placeholder="Brother's Name" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">Role / Privilege</label>
+                        <select name="Admin_Role" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none transition-all">
+                            <option value="">Select an option</option>
+                            <option value="Secretary">Secretary</option>
+                            <option value="Elder">Elder</option>
+                            <option value="Ministerial Servant">Ministerial Servant</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">Email Address</label>
+                        <input type="email" name="Email" required placeholder="For deployment instructions" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">Phone Number (Optional)</label>
+                        <input type="tel" name="Phone" placeholder="For WhatsApp coordination" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none transition-all">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Legal & Terms -->
+            <div>
+                <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">3. Terms of Service & Liability Waiver</h3>
+                
+                <div class="h-48 overflow-y-auto custom-scrollbar p-4 bg-slate-50 border border-slate-300 rounded-lg text-xs text-slate-600 space-y-3 mb-4">
+                    <p class="font-bold text-slate-800">Please read carefully before requesting deployment.</p>
+                    
+                    <p><strong>1. Independence & Non-Affiliation:</strong> The Service Reports Manager (the "Software") is an independent, open-source template tool developed privately to assist congregation secretaries. It is NOT officially endorsed by, affiliated with, sponsored by, or provided by the Christian Congregation of Jehovah’s Witnesses or any branch office.</p>
+                    
+                    <p><strong>2. Data Ownership & Privacy:</strong> By deploying this Software, your congregation accepts full and sole responsibility for the privacy, security, and management of all publisher data. The developer of this Software has absolutely zero access to your database, records, or passwords. Your database is strictly isolated.</p>
+                    
+                    <p><strong>3. Voluntary Use (Compliance):</strong> Use of this Software by individual publishers must be strictly voluntary. Elders agree not to pressure or mandate publishers to use digital submission links. Elders must continue to accept physical paper reports from any publisher who prefers that method, in accordance with branch guidelines regarding third-party software.</p>
+                    
+                    <p><strong>4. "As-Is" Provision & Liability Waiver:</strong> This Software is provided "as is," without warranty of any kind, express or implied. In no event shall the developer be held liable for any claim, damages, data loss, service interruptions, or other liability arising from the use of the Software.</p>
+                    
+                    <p><strong>5. Financial Arrangement:</strong> Deployment and hosting support are maintained through voluntary donations. There is no legally binding contract, subscription, or fixed fee required for usage.</p>
+                </div>
+
+                <label class="flex items-start gap-3 cursor-pointer p-3 bg-teal-50 border border-teal-100 rounded-lg hover:bg-teal-100 transition-colors">
+                    <input type="checkbox" id="agree_terms" name="Agreed_To_Terms" value="Yes" required class="mt-1 w-4 h-4 text-teal-600 bg-white border-slate-300 rounded focus:ring-teal-500 focus:ring-2">
+                    <span class="text-sm text-teal-900 font-medium">I have read the Terms of Service and Liability Waiver. I confirm that I am authorized to request this deployment on behalf of the congregation, and we accept full responsibility for our data management and compliance.</span>
+                </label>
+            </div>
+
+            <!-- Submit Action -->
+            <div class="pt-4 border-t border-slate-200 flex items-center justify-between">
+                <span class="text-xs text-slate-500 flex items-center gap-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    Secure Form via FormSubmit
+                </span>
+                <button type="submit" class="bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-500 hover:to-cyan-500 text-white px-8 py-3 rounded-xl font-bold shadow-lg shadow-teal-500/30 transition-all focus:ring-4 focus:ring-teal-500 focus:outline-none">
+                    Submit Request
+                </button>
+            </div>
+            
+        </form>
+    </div>
+
+    <!-- Custom Validation Toast -->
+    <div id="validation-toast" class="hidden fixed bottom-6 right-6 bg-rose-600 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3 toast-enter z-50">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+        <span class="font-medium text-sm">Please agree to the Terms of Service to continue.</span>
+    </div>
+
+    <script>
+        function handleValidation(event) {
+            const checkbox = document.getElementById('agree_terms');
+            if (!checkbox.checked) {
+                event.preventDefault(); // Stop form submission
+                
+                // Show custom toast message
+                const toast = document.getElementById('validation-toast');
+                toast.classList.remove('hidden');
+                
+                // Highlight the checkbox area
+                checkbox.parentElement.classList.add('border-rose-400', 'bg-rose-50');
+                checkbox.parentElement.classList.remove('border-teal-100', 'bg-teal-50');
+                
+                setTimeout(() => {
+                    toast.classList.add('hidden');
+                    checkbox.parentElement.classList.remove('border-rose-400', 'bg-rose-50');
+                    checkbox.parentElement.classList.add('border-teal-100', 'bg-teal-50');
+                }, 4000);
+                
+                return false;
+            }
+            
+            // If checked, allow the form to submit natively to FormSubmit.co
+            const btn = document.querySelector('button[type="submit"]');
+            btn.innerHTML = '<svg class="animate-spin -ml-1 mr-2 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Processing...';
+            btn.disabled = true;
+            btn.classList.add('opacity-75', 'cursor-not-allowed');
+            
+            return true;
+        }
+    </script>
+</body>
+</html>
